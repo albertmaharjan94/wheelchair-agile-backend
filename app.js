@@ -12,6 +12,9 @@ app.use(bodyParser.urlencoded({
     extended : false,
 }));
 
+app.get('/', (req, res)=>{
+    res.send("MOBILITY WHEELCHAIR GOES BRRRRRRRRRRRRRRRRRRR");
+})
 
 app.use("/public", express.static(__dirname + '/public'));
 
