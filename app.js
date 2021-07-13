@@ -4,7 +4,9 @@ const express = require("express")
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
+const fs = require('fs');
+const path = require('path');
+const url = require('url');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -13,7 +15,9 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', (req, res)=>{
-    res.send("MOBILITY WHEELCHAIR GOES BRRRRRRRRRRRRRRRRRRR");
+    var img = fs.readFileSync('./intro.gif');
+    res.writeHead(200, {'Content-Type': 'image/gif' });
+    res.end(img, 'binary');
 })
 
 app.use("/public", express.static(__dirname + '/public'));
@@ -26,9 +30,6 @@ app.use('/api/admin', require('./routes/adminAuth'));
 
 
 
-app.use(function(err, req, res, next){
-    res.status(422).send({error: err.message});
-});
     
 app.listen(process.env.PORT||3000,() => {
     console.log("Server is listening to port 3000")
