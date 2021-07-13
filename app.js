@@ -12,10 +12,14 @@ app.use(bodyParser.urlencoded({
     extended : false,
 }));
 
+// app.get('/', (req, res)=>{
+//     var img = fs.readFileSync('./intro.gif');
+//     res.writeHead(200, {'Content-Type': 'image/gif' });
+//     res.end(img, 'binary');
+// })
+
 app.get('/', (req, res)=>{
-    var img = fs.readFileSync('./intro.gif');
-    res.writeHead(200, {'Content-Type': 'image/gif' });
-    res.end(img, 'binary');
+    res.send("Hello ");
 })
 
 app.use("/public", express.static(__dirname + '/public'));
