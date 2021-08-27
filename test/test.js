@@ -6,10 +6,14 @@ const Vehicle = require('../models/Vehicle');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const url = "mongodb://localhost:27017/mobility_test";
+
 const config = require("../config")
 
 
+// set test mongoose database
+const url = "mongodb://localhost:27017/mobility_test";
+
+// setup test connection
 beforeAll(async () => {
     await mongoose.connect(url, {
         useNewUrlParser: true,
@@ -32,6 +36,8 @@ var activity_id;
 var vehicle_id;
 var tracker_id;
 
+
+// test set for admin
 describe('Admin Test', () => {
     it('adminRegistration', async () => {
         const admin = {
@@ -86,9 +92,7 @@ describe('Admin Test', () => {
     })
 })
 
-
-
-
+// test set for vehicle
 describe('VehicleSchema Test', () => {
     it('vehicleRegistration', async () => {
         const vehicle = {
@@ -121,46 +125,8 @@ describe('VehicleSchema Test', () => {
     })
 })
 
-/**
- * fullname: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
 
-    address: {
-        type: String,
-        required: true,
-    },
-    contact: {
-        type: String,
-        required: true,
-    },
-
-    emContact: {
-        type: String,
-        required: true,
-    },
-
-    age: {
-        type: String,
-        required: true,
-    },
-
-    password: {
-        type: String,
-        required: true,
-    },
-    vehicle : {
-        type : Schema.Types.ObjectId,
-        ref : 'Vehicle',
-        required : true,
-    },
- */
-
+// test set for user
 describe('User Test', () => {
     it('userRegistration', async () => {
         const user = {
@@ -219,6 +185,7 @@ describe('User Test', () => {
     })
 })
 
+// test set for activity
 describe('Activity Test', () => {
     it('activityCreate', async () => {
         const activity = {
@@ -272,8 +239,7 @@ describe('Activity Test', () => {
     })
 })
 
-
-
+// test set for tracker
 describe('Tracter Test', () => {
     it('trackerCreate', async () => {
         const tracker = {
