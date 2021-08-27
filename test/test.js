@@ -268,7 +268,58 @@ describe('Activity Test', () => {
             {
                 "new": true
             }).exec();
-        return expect(activity.activity.length >1).toEqual(true);
+        return expect(activity.activity.length > 1).toEqual(true);
+    })
+})
+
+
+
+describe('Tracter Test', () => {
+    it('trackerCreate', async () => {
+        const tracker = {
+            "user": user_id,
+            "vehicle": vehicle_id,
+            "location": {
+                "type": "Point",
+                "coordinates": [
+                    27.8053082088538,
+                    85.32936819601943
+                ]
+            }
+        }
+        const data = await Tracker.create(tracker);
+        tracker_id = data._id;
+        expect(data.user).toEqual(user_id);
+    })
+
+    it('gettrackerById', async () => {
+        var tracker = await Tracker.findOne({ "_id": tracker_id }).exec();
+        return expect(tracker.user).toEqual(user_id);
+    })
+
+    it('updatetrackerById', async () => {
+        var new_location = {
+            "location":
+            {
+                "type": "Point",
+                "coordinates": [
+                    28.90123191,
+                    86.98123911
+                ]
+            }
+        }
+        var tracker = await Tracker.findOneAndUpdate({ "_id": tracker_id }, {
+            $set: new_location
+        },
+            {
+                "new": true
+            }).exec();
+        return expect(tracker.location.coordinates[0]).toEqual(new_location.location.coordinates[0]);
+    })
+
+    it('deleteById', async () => {
+        var status = await Tracker.deleteOne({ "_id": tracker_id }).exec();
+        return expect(status.ok).toBe(1);
     })
 })
 
